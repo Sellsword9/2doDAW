@@ -1,0 +1,93 @@
+div
+{
+    display: grid;
+    grid-template-areas:
+    "one    two    three"
+    "four   five   six  "
+    "seven  eight  nine "
+    "mult   zero   equal"
+    "add    sub    frac"
+    "clear  clear  clear"
+    "output output output";
+
+}
+.one
+{
+    grid-area: one;
+}
+.two
+{
+    grid-area: two;
+}
+.three
+{
+    grid-area: three;
+}
+.four
+{
+    grid-area: four;
+}
+.five
+{
+    grid-area: five;
+}
+.six
+{
+    grid-area: six;
+}
+.seven
+{
+    grid-area: seven;
+}
+.eight
+{
+    grid-area: eight;
+}
+.nine
+{
+    grid-area: nine;
+}
+.zero
+{
+    grid-area: zero;
+}
+.mult
+{
+    grid-area: mult;
+}
+.frac
+{
+    grid-area: frac;
+}
+.add
+{
+    grid-area: add;
+}
+.sub
+{
+    grid-area: sub;
+}
+.equal
+{
+    grid-area: equal;
+}
+.clear
+{
+    grid-area: clear;
+}
+.output
+{
+    grid-area: output;
+}
+button
+{
+    height: 10vh;
+    width: 32vw;
+    margin: 1vh;
+}
+.clear
+{
+    height: 10vh;
+    width: 100vw;
+    margin: 1vh;
+}
