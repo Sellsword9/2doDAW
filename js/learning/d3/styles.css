@@ -7,3 +7,42 @@ body {
     background-color: black;
     color: white;
   }
+
+div {
+    display: grid;
+    grid-template-areas: 
+    "header header  header header"
+    "nav    article ads    ads"
+    "nav    article ads    ads"
+    "footer footer  footer darkmode";
+    grid-template-columns: 25vw 50vw 20vw 5vw;
+    grid-template-rows: auto;
+}
+div > * {
+    padding: 5vw;
+}
+header {
+    grid-area: header;
+    border: 1px solid wheat;
+}
+nav {
+    grid-area: nav;
+    border: 1px solid wheat;
+}
+article {
+    grid-area: article;
+    border: 1px solid wheat;
+}
+footer {
+    grid-area: footer;
+    border: 1px solid wheat;
+}
+.ads {
+    grid-area: ads;
+    border: 1px solid wheat;
+}
+.darkmode
+{
+    grid-area: darkmode;
+    border: 1px solid wheat;
+}
