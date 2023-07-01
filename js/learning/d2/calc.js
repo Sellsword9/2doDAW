@@ -49,5 +49,6 @@ zero.addEventListener("click", function() {
 });
 /* --- Numeros FIN --- */
 
+// TODO: Operadores
 /* --- Operadores --- */
 
