@@ -1,0 +1,93 @@
+:root /* Variables */
+{
+  --WBB: #131313; /* White button background */
+  --WBT: white; /* White button text */
+  --BH: #a04545; /* Button hover */
+  --BBB: #a09e9e; /* Black button background */
+  --BBT: dodgerblue; /* Black button text */
+}
+/*/ Sizes & General /*/
+.container 
+{
+  display: grid;
+  grid-template-areas: 
+  "nav editor";
+  grid-template-columns: 8% 88%;
+  column-gap: 1%;
+}
+.container > nav 
+{
+  grid-area: nav;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  row-gap: 10px;
+}
+.editor 
+{
+  margin-bottom: 10px;
+  grid-area: editor;
+}
+button 
+{
+  border: none;
+  cursor: pointer;
+  height: 50px;
+  width: 100%;
+}
+button:hover 
+{
+  background-color: var(--BH) !important;
+}
+
+
+
+/*/// Colors ///*/
+
+/*/ White mode /*/
+
+button /* White mode button & General sizes */
+{
+  background-color: var(--WBB);
+  color: var(--WBT);
+}
+body /*White area body*/
+{
+  background-color: white;
+  color: black;
+}
+.container > * /* White mode borders */
+{
+  border: 1px solid black;
+}
+
+/*/ Dark mode /*/
+.container > * /* Dark mode borders */
+{
+  border: 1px solid white;
+}
+
+body.dark-mode > * > button /* Dark mode button */
+{ 
+  background-color: var(--BBB);
+  color: var(--BBT)
+}
+body.dark-mode > * > .editor, 
+body.dark-mode > * > input 
+{ /* Dark mode textarea & input */
+  background-color: #1a1a1a;
+  color: wheat;
+}
+body.dark-mode  /* Dark mode body */
+{
+  background-color: black;
+  color: white;
+}
+
+/*/// Search section ///*/
+.highlighted
+{
+  background-color: yellow !important;
+  color: black !important;
+}
