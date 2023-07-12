@@ -4,20 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Build your own card</title>
+    <link rel="stylesheet" href="../styles/buildmode.css">
 </head>
-<body>
+<body class="buildmode">
     <h1>Build your own card</h1>
-    <section>
+    <section class="stat">
         <h2>Card name</h2>
         <textarea id="cardName" placeholder="Card name"></textarea>
     </section>
-    <section>
-        <h2>Strength stat</h2>
-        <textarea id="strengthStat" placeholder="Strength"></textarea>
+    <section class="stat">
+        <h2>Fuerza
+            <p> +4 dmg +2 def +1 hp -0.5 sp </p>
+        </h2>
+        <textarea id="FuerzaStat" placeholder="..."></textarea>
     </section>
-    <section>
-        <h2>Defense stat</h2>
-        <textarea id="defenseStat" placeholder="Defense"></textarea>
+    <section class="stat">
+        <h2>Constitución
+            <p> +4 def +2 hp +1 sp -0.5 mag </p>
+        </h2>
+        <textarea id="ConstitucionStat" placeholder="..."></textarea>
     </section>
+    <section class="stat">
+        <h2>Destreza
+            <p> +4 sp +2 dmg +1 def -0.5 ch</p>
+        </h2>
+        <textarea id="DestrezaStat" placeholder="..."></textarea>
+    </section>
+    <section class="stat">
+        <h2>Inteligencia
+            <p> +4 mag +2 sp +1 ch -0.5 def</p>
+        </h2>
+        <textarea id="InteligenciaStat" placeholder="..."></textarea>
+    </section>
+    <section class="stat">
+        <h2>Carisma
+            <p> +4 ch +2 mag +1 dmg -0.5 def</p>
+        </h2>
+        <textarea id="CarismaStat" placeholder="..."></textarea>
+    </section>
+    <section class="stat">
+        <h2>Suerte 
+            <p> +3 def +1 sp +1 hp +0.5 dmg </p>
+        </h2>
+        <textarea id="cardDescription" placeholder="Card description"></textarea>
 </body>
 </html>
