@@ -1,0 +1,10 @@
+.buildmode > .stat > h2:hover > *
+{
+    display: inline;
+    color: red;
+}
+.buildmode > .stat > h2 > *
+{
+    display: none;
+}
+
