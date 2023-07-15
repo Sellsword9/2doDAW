@@ -56,34 +56,59 @@ class previewCardModel
     def: number;    eva: number;   sp: number; //Otros
     //Modificadores (F.Mod(stats) -> atts)
     // Fuerza
-    DmgFrz: number = +4;
-    DefFrz: number = +2;
-    HpFrz:  number = +1;
-    SpFrz:  number = -1;
+    /**+4 */
+    readonly DmgFrz: number = +4;
+    /**+2 */
+    readonly DefFrz: number = +2;
+    /**+1 */
+    readonly HpFrz:  number = +1;
+    /**-1 */
+    readonly SpFrz:  number = -1;
     // Constitución
-    DefConst: number = +4;
-    HpConst:  number = +2;
-    SpConst:  number = +1;
-    EvaConst: number = -1;
+    /**+4 */
+    readonly DefConst: number = +4;
+    /**+2 */
+    readonly HpConst:  number = +2;
+    /**+1 */
+    readonly SpConst:  number = +1;
+    /**-1 */
+    readonly EvaConst: number = -1;
     // Destreza
-    EvaDex: number = +4;
-    DmgDex: number = +2;
-    SpDex:  number = +1;
-    HpDex:  number = -1;
+    /**+4 */
+    readonly EvaDex: number = +4;
+    /**+2 */
+    readonly DmgDex: number = +2;
+    /**+1 */
+    readonly SpDex:  number = +1;
+    /**-1 */
+    readonly HpDex:  number = -1;
     // Inteligencia
-    MagIntel: number = +4;
-    SpIntel:  number = +2;
-    EvaIntel: number = +1;
-    DefIntel: number = -1;
+    /**+4 */
+    readonly MagIntel: number = +4;
+    /**+2 */
+    readonly SpIntel:  number = +2;
+    /**-1 */
+    readonly DefIntel: number = -1;
     // Carisma
-    VcChar:  number = +4;
-    MagChar: number = +1;
-    DmgChar: number = +1;
+    /**+6 */
+    readonly VcChar:  number = +4;
+    /**+1 */
+    readonly EvaChar: number = +1;
+    /**+1 */
+    readonly DefChar:  number = +1;
+    /**-1 */
+    readonly MagChar: number = -1;
+    /**-1 */
+    readonly DmgChar: number = -1;
     // Suerte
-    EvaSuerte: number = +2;
-    VcSuerte:  number = +2;
-    SpSuerte:  number = +1;
-    DmgSuerte: number = +1; 
+    /**+2 */
+    readonly EvaSuerte: number = +2;
+    /**+2 */
+    readonly VcSuerte:  number = +2;
+    /**+2 */
+    readonly SpSuerte:  number = +1;
+    /**+1 */
+    readonly DmgSuerte: number = +1; 
 
     constructor(frz: number, con: number, dex: number, 
                 int: number, chr: number, srt: number)
@@ -91,7 +116,43 @@ class previewCardModel
         this.Fuerza = frz; this.Const = con; this.Dex = dex;
         this.Intel = int; this.Carisma = chr; this.Suerte = srt;
         // Asignación atributos
-
-
+        // Hp
+        this.hp = 2*
+        this.HpConst * this.Const+
+        this.HpDex * this.Dex+     // +2 -1 +2 = 3 (6)
+        this.HpFrz * this.Fuerza;
+        // Dmg
+        this.dmg = 
+        this.DmgFrz * this.Fuerza+  // +4 -1 +1 +2 = 6
+        this.DmgChar * this.Carisma+
+        this.DmgSuerte * this.Suerte+
+        this.DmgDex * this.Dex;
+        // Mag
+        this.mag =
+        this.MagIntel * this.Intel+ // +5 -1 = 4
+        this.MagChar * this.Carisma;
+        // Def
+        this.def =
+        this.DefFrz * this.Fuerza+ //+4 +2 -1 +1 = 6
+        this.DefConst * this.Const+
+        this.DefIntel * this.Intel+
+        this.DefChar * this.Carisma;
+        // Eva
+        this.eva =
+        this.EvaDex * this.Dex+ // +4 -1 +1 +2 = 6 
+        this.EvaConst * this.Const+
+        this.EvaChar * this.Carisma+
+        this.EvaSuerte * this.Suerte;
+        // Sp
+        this.sp =
+        this.SpDex * this.Dex+ // +1 +1 +2 +2 -1 = 5
+        this.SpConst * this.Const+
+        this.SpIntel * this.Intel+
+        this.SpSuerte * this.Suerte+
+        this.SpFrz * this.Fuerza;
+        // Vc
+        this.vc =
+        this.VcChar * this.Carisma+ // +6 +2 = 8
+        this.VcSuerte * this.Suerte;
     }
 }
