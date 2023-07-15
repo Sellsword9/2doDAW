@@ -7,4 +7,29 @@
 {
     display: none;
 }
-
+.buildmode
+{
+    display: grid;
+    grid-template-areas: 
+    "config preview"
+    "config preview"
+    "buttonS buttonL";
+}
+.preview
+{
+    grid-area: preview;
+    border: 1px solid black;
+}
+.configSection
+{
+    grid-area: config;
+    border: 1px solid black;
+}
+.buttonS
+{
+    grid-area: buttonS;
+}
+.buttonL
+{
+    grid-area: buttonL;
+}
