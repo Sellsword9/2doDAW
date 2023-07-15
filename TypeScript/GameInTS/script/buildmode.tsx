@@ -1,12 +1,12 @@
 function updateStats() {
-    console.log("updateStats called");
+    // console.log("updateStats called");
     var text = document.getElementById("statsSum");
     var statsTotal = 0;
     var statElements = document.getElementsByClassName("statInput");
     var statArray = [...statElements];
     statArray.forEach(function (el)
     {
-        console.log(el.constructor.name)
+        // console.log(el.constructor.name)
         var stat;
         if (el instanceof HTMLTextAreaElement)
         {
@@ -38,8 +38,37 @@ function updateStats() {
 {
     console.log("updated");
     element.addEventListener("input", updateStats); // Añadir un listener para cuando se actualice
+    element.addEventListener("input", updatePreview);
     // Que llame a la función updateStats
 });
+
+function updatePreview()
+{
+    var stats = [...document.getElementsByClassName("statInput")];
+    var PreviewDmg = document.getElementById("cpDmg");
+    var PreviewHp = document.getElementById("cpHp");
+    var PreviewMag = document.getElementById("cpMag");
+    var PreviewDef = document.getElementById("cpDef");
+    var PreviewEva = document.getElementById("cpEva");
+    var PreviewSp = document.getElementById("cpSp");
+    var PreviewVc = document.getElementById("cpVc");
+    stats.forEach(function (el) //TODO
+    {
+        if (el instanceof HTMLTextAreaElement)
+        {
+            var stat = parseInt(el.value);
+            if (!isNaN(stat) && !(stat == null))
+            {
+                //TODO
+
+            }
+        }
+        else
+        {
+            console.error("stat element not found");
+        }
+    });
+}
 
 // Crear preview
 class previewCardModel
