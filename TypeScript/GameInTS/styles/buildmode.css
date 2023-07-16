@@ -1,9 +1,9 @@
-.buildmode > .stat > h2:hover > *
+.buildmode > .configSection > .stat > h2:hover > *
 {
     display: inline;
     color: red;
 }
-.buildmode > .stat > h2 > *
+.buildmode > .configSection > .stat > h2 > *
 {
     display: none;
 }
