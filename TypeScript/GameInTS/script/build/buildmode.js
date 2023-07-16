@@ -1,14 +1,6 @@
-var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
-    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
-        if (ar || !(i in from)) {
-            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
-            ar[i] = from[i];
-        }
-    }
-    return to.concat(ar || Array.prototype.slice.call(from));
-};
 var previewCardModel = /** @class */ (function () {
     function previewCardModel(frz, con, dex, int, chr, srt) {
+        this.PowerType = "";
         //Modificadores (F.Mod(stats) -> atts)
         // Fuerza
         /**+4 */
@@ -72,13 +64,13 @@ var previewCardModel = /** @class */ (function () {
         this.Suerte = srt;
         // Asignación atributos
         this.calcularAtributos();
+        this.calcularTipo();
     }
     previewCardModel.prototype.calcularAtributos = function () {
         // Hp
-        this.hp = 2 *
-            this.HpConst * this.Const +
+        this.hp = 2 * (this.HpConst * this.Const +
             this.HpDex * this.Dex + // +2 -1 +2 = 3 (6)
-            this.HpFrz * this.Fuerza;
+            this.HpFrz * this.Fuerza);
         // Dmg
         this.dmg =
             this.DmgFrz * this.Fuerza + // +4 -1 +1 +2 = 6
@@ -113,10 +105,29 @@ var previewCardModel = /** @class */ (function () {
             this.VcChar * this.Carisma + // +6 +2 = 8
                 this.VcSuerte * this.Suerte;
     };
+    previewCardModel.prototype.calcularTipo = function () {
+        var total = this.Fuerza + this.Const + this.Dex
+            + this.Intel + this.Carisma + this.Suerte;
+        this.PowerType =
+            this.Carisma < 0 || this.Suerte < 0 || this.Intel < 0
+                || this.Dex < 0 || this.Const < 0 || this.Fuerza < 0 ?
+                "Paradójico (No válido)" :
+                this.hp < 1 ? "Experimento fallido (No válido)" :
+                    (total >= 100 && total <= 120) ? "Mítico"
+                        : (total >= 81 && total <= 99) ? "Sobrenatural"
+                            : (total >= 60 && total <= 80) ? "Competente+"
+                                : (total <= 60 && this.Fuerza > 25) ? "Bárbaro"
+                                    : (total <= 60 && this.Const > 25) ? "Caballero"
+                                        : (total <= 60 && this.Dex > 25) ? "Espectro"
+                                            : (total <= 60 && this.Intel > 25) ? "Hechicero"
+                                                : (total <= 60 && this.Carisma > 25) ? "Bardo"
+                                                    : (total <= 60 && this.Suerte > 25) ? "Proscrito"
+                                                        : (total <= 25) ? "Civil" :
+                                                            (total <= 60) ? "Competente" : "No válido";
+    };
     return previewCardModel;
 }());
 function updatePreview() {
-    console.log("updatePreview");
     var _a, _b, _c, _d, _e, _f;
     var PreviewDmg = document.getElementById("cpDmg");
     var PreviewHp = document.getElementById("cpHp");
@@ -125,6 +136,7 @@ function updatePreview() {
     var PreviewEva = document.getElementById("cpEva");
     var PreviewSp = document.getElementById("cpSp");
     var PreviewVc = document.getElementById("cpVc");
+    var PreviewType = document.getElementById("cpType");
     var FuerzaStat = parseInt((_a = document.getElementById("FuerzaStat")) === null || _a === void 0 ? void 0 : _a.value);
     var ConstStat = parseInt((_b = document.getElementById("ConstitucionStat")) === null || _b === void 0 ? void 0 : _b.value);
     var DexStat = parseInt((_c = document.getElementById("DestrezaStat")) === null || _c === void 0 ? void 0 : _c.value);
@@ -134,7 +146,7 @@ function updatePreview() {
     var currentPreview = new previewCardModel(FuerzaStat, ConstStat, DexStat, IntelStat, CarismaStat, SuerteStat);
     if (currentPreview && PreviewDmg && PreviewHp
         && PreviewMag && PreviewDef && PreviewEva
-        && PreviewSp && PreviewVc) {
+        && PreviewSp && PreviewVc && PreviewType) {
         PreviewDmg.innerHTML = currentPreview.dmg + "dmg";
         PreviewDef.innerHTML = currentPreview.def + "def";
         PreviewEva.innerHTML = currentPreview.eva + "eva";
@@ -142,19 +154,23 @@ function updatePreview() {
         PreviewMag.innerHTML = currentPreview.mag + "mag";
         PreviewSp.innerHTML = currentPreview.sp + "sp";
         PreviewVc.innerHTML = currentPreview.vc + "vc";
+        PreviewType.innerHTML = currentPreview.PowerType;
     }
     else {
         console.error("Preview element not found");
     }
 }
 function updateStats() {
-   console.log("updateStats called");
+    // console.log("updateStats called");
     var text = document.getElementById("statsSum");
     var statsTotal = 0;
     var statElements = document.getElementsByClassName("statInput");
-    var statArray = __spreadArray([], statElements, true);
+    var statArray = [];
+    for (var i = 0; i < statElements.length; i++) {
+        statArray[i] = statElements[i];
+    }
     statArray.forEach(function (el) {
-        console.log(el.constructor.name)
+        // console.log(el.constructor.name)
         var stat;
         if (el instanceof HTMLTextAreaElement) {
             stat = parseInt(el.value);
@@ -174,11 +190,13 @@ function updateStats() {
         console.error("statsSum element not found");
     }
 }
-console.log("script loaded");
+var elements = document.getElementsByClassName("stat");
 // Actualizar estadísticas
-__spreadArray([], document.getElementsByClassName("stat"), true).forEach(function (element) {
-    console.log("updated");
-    element.addEventListener("input", updateStats); // Añadir un listener para cuando se actualice
+for (var i = 0; i < document.getElementsByClassName("stat").length; i++) // Por cada estadística,
+ {
+    //console.log("updated");
+    elements[i].addEventListener("input", updateStats); // Añadir un listener para cuando se actualice
     // Que llame a la función updateStats
     // Esta a su vez, llama a la función updatePreview
-});
+}
+;

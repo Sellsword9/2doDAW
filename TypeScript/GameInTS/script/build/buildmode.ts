@@ -1,5 +1,8 @@
 class previewCardModel
 {
+    flavorNombre: string;
+    flavorDescr: string;
+    PowerType: string = "";
     Fuerza: number;
     Const: number;
     Dex: number;
@@ -9,7 +12,7 @@ class previewCardModel
     // Atributos
     hp:  number; // Vida
     mag: number;    dmg: number;   vc: number; //Ataques
-    def: number;    eva: number;   sp: number; //Otros
+    def: number;    eva: number;   sp: number; //Otros 
     //Modificadores (F.Mod(stats) -> atts)
     // Fuerza
     /**+4 */
@@ -73,14 +76,15 @@ class previewCardModel
         this.Intel = int; this.Carisma = chr; this.Suerte = srt;
         // Asignación atributos
         this.calcularAtributos();
+        this.calcularTipo();
     }
     calcularAtributos()
     {
         // Hp
-        this.hp = 2*
+        this.hp = 2*(
         this.HpConst * this.Const+
         this.HpDex * this.Dex+     // +2 -1 +2 = 3 (6)
-        this.HpFrz * this.Fuerza;
+        this.HpFrz * this.Fuerza);
         // Dmg
         this.dmg = 
         this.DmgFrz * this.Fuerza+  // +4 -1 +1 +2 = 6
@@ -115,6 +119,27 @@ class previewCardModel
         this.VcChar * this.Carisma+ // +6 +2 = 8
         this.VcSuerte * this.Suerte;
     }
+    calcularTipo()
+    {
+        var total = this.Fuerza + this.Const + this.Dex
+        + this.Intel + this.Carisma + this.Suerte;
+        this.PowerType =
+        this.Carisma < 0 || this.Suerte < 0 || this.Intel < 0 
+        || this.Dex < 0 || this.Const < 0 || this.Fuerza < 0 ? 
+        "Paradójico (No válido)":
+        this.hp < 1 ? "Experimento fallido (No válido)":
+        (total >= 100 && total <= 120) ? "Mítico"
+        : (total >= 81 && total <= 99) ? "Sobrenatural"
+        : (total >= 61 && total <= 80) ? "Competente+"
+        : (total <= 60 && this.Fuerza > 25) ? "Bárbaro"
+        : (total <= 60 && this.Const > 25) ? "Caballero"
+        : (total <= 60 && this.Dex > 25) ? "Espectro"
+        : (total <= 60 && this.Intel > 25) ? "Hechicero"
+        : (total <= 60 && this.Carisma > 25) ? "Bardo"
+        : (total <= 60 && this.Suerte > 25) ? "Proscrito"
+        : (total <= 25) ? "Civil": 
+        (total <= 60) ? "Competente" : "No válido";  
+    }
 }
 
 function updatePreview()
@@ -126,6 +151,7 @@ function updatePreview()
     var PreviewEva = document.getElementById("cpEva");
     var PreviewSp = document.getElementById("cpSp");
     var PreviewVc = document.getElementById("cpVc");
+    var PreviewType = document.getElementById("cpType");
 
     var FuerzaStat = parseInt((document.getElementById("FuerzaStat") as HTMLTextAreaElement)?.value);
     var ConstStat = parseInt((document.getElementById("ConstitucionStat") as HTMLTextAreaElement)?.value);
@@ -140,7 +166,7 @@ function updatePreview()
     
     if (currentPreview && PreviewDmg && PreviewHp 
         && PreviewMag && PreviewDef && PreviewEva 
-        && PreviewSp && PreviewVc)
+        && PreviewSp && PreviewVc && PreviewType)
     {
         PreviewDmg.innerHTML = currentPreview.dmg + "dmg";
         PreviewDef.innerHTML = currentPreview.def + "def";
@@ -149,6 +175,7 @@ function updatePreview()
         PreviewMag.innerHTML = currentPreview.mag + "mag";
         PreviewSp.innerHTML = currentPreview.sp + "sp";
         PreviewVc.innerHTML = currentPreview.vc + "vc";
+        PreviewType.innerHTML = currentPreview.PowerType;
     }
     else
     {
@@ -161,7 +188,11 @@ function updateStats()
     var text = document.getElementById("statsSum");
     var statsTotal = 0;
     var statElements = document.getElementsByClassName("statInput");
-    var statArray = [...statElements];
+    var statArray: Element[] = [];
+    for (var i = 0; i < statElements.length; i++)
+    {
+        statArray[i] = statElements[i];
+    }
     statArray.forEach(function (el)
     {
         // console.log(el.constructor.name)
@@ -183,7 +214,7 @@ function updateStats()
     if (!(text == null))
     {
         text.innerHTML = "Total stats: " + statsTotal;
-       // updatePreview();
+       updatePreview();
     }
     else
     {
@@ -192,12 +223,12 @@ function updateStats()
 
 }
 
-console.log("script loaded");
+var elements = document.getElementsByClassName("stat");
 // Actualizar estadísticas
-[...document.getElementsByClassName("stat")]?.forEach(function (element) // Por cada estadística,
+for (var i = 0; i < document.getElementsByClassName("stat").length; i++) // Por cada estadística,
 {
-    console.log("updated");
-    element.addEventListener("input", updateStats); // Añadir un listener para cuando se actualice
+    //console.log("updated");
+    elements[i].addEventListener("input", updateStats); // Añadir un listener para cuando se actualice
     // Que llame a la función updateStats
         // Esta a su vez, llama a la función updatePreview
-});
+};
