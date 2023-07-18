@@ -33,3 +33,15 @@
 {
     grid-area: buttonL;
 }
+
+.preview
+{
+    display: grid;
+    grid-template-areas: 
+    "title  title  title"
+    "combat combat combat";
+}
+.preview > .previewTitle
+{
+    font-size: xx-large !important;
+}

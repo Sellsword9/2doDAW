@@ -1,5 +1,6 @@
+var _a, _b;
 var previewCardModel = /** @class */ (function () {
-    function previewCardModel(frz, con, dex, int, chr, srt) {
+    function previewCardModel(frz, con, dex, int, chr, srt, nombre, descr) {
         this.PowerType = "";
         //Modificadores (F.Mod(stats) -> atts)
         // Fuerza
@@ -56,6 +57,8 @@ var previewCardModel = /** @class */ (function () {
         this.SpSuerte = +1;
         /**+1 */
         this.DmgSuerte = +1;
+        this.flavorNombre = nombre;
+        this.flavorDescr = descr;
         this.Fuerza = frz;
         this.Const = con;
         this.Dex = dex;
@@ -115,7 +118,7 @@ var previewCardModel = /** @class */ (function () {
                 this.hp < 1 ? "Experimento fallido (No válido)" :
                     (total >= 100 && total <= 120) ? "Mítico"
                         : (total >= 81 && total <= 99) ? "Sobrenatural"
-                            : (total >= 60 && total <= 80) ? "Competente+"
+                            : (total >= 61 && total <= 80) ? "Competente+"
                                 : (total <= 60 && this.Fuerza > 25) ? "Bárbaro"
                                     : (total <= 60 && this.Const > 25) ? "Caballero"
                                         : (total <= 60 && this.Dex > 25) ? "Espectro"
@@ -128,7 +131,7 @@ var previewCardModel = /** @class */ (function () {
     return previewCardModel;
 }());
 function updatePreview() {
-    var _a, _b, _c, _d, _e, _f;
+    var _a, _b, _c, _d, _e, _f, _g, _h;
     var PreviewDmg = document.getElementById("cpDmg");
     var PreviewHp = document.getElementById("cpHp");
     var PreviewMag = document.getElementById("cpMag");
@@ -137,24 +140,47 @@ function updatePreview() {
     var PreviewSp = document.getElementById("cpSp");
     var PreviewVc = document.getElementById("cpVc");
     var PreviewType = document.getElementById("cpType");
+    var PreviewName = document.getElementById("cpName");
+    var PreviewDescr = document.getElementById("cpDescription");
+    var PreviewModFrz = document.getElementById("cpModFuerza");
+    var PreviewModCon = document.getElementById("cpModConstitucion");
+    var PreviewModDex = document.getElementById("cpModDestreza");
+    var PreviewModInt = document.getElementById("cpModInteligencia");
+    var PreviewModCar = document.getElementById("cpModCarisma");
+    var PreviewModSue = document.getElementById("cpModSuerte");
     var FuerzaStat = parseInt((_a = document.getElementById("FuerzaStat")) === null || _a === void 0 ? void 0 : _a.value);
     var ConstStat = parseInt((_b = document.getElementById("ConstitucionStat")) === null || _b === void 0 ? void 0 : _b.value);
     var DexStat = parseInt((_c = document.getElementById("DestrezaStat")) === null || _c === void 0 ? void 0 : _c.value);
     var IntelStat = parseInt((_d = document.getElementById("InteligenciaStat")) === null || _d === void 0 ? void 0 : _d.value);
     var CarismaStat = parseInt((_e = document.getElementById("CarismaStat")) === null || _e === void 0 ? void 0 : _e.value);
     var SuerteStat = parseInt((_f = document.getElementById("SuerteStat")) === null || _f === void 0 ? void 0 : _f.value);
-    var currentPreview = new previewCardModel(FuerzaStat, ConstStat, DexStat, IntelStat, CarismaStat, SuerteStat);
+    var nombre = (_g = document.getElementById("cardName")) === null || _g === void 0 ? void 0 : _g.value;
+    var descr = (_h = document.getElementById("cardDescription")) === null || _h === void 0 ? void 0 : _h.value;
+    var currentPreview = new previewCardModel(FuerzaStat, ConstStat, DexStat, IntelStat, CarismaStat, SuerteStat, nombre, descr);
     if (currentPreview && PreviewDmg && PreviewHp
         && PreviewMag && PreviewDef && PreviewEva
-        && PreviewSp && PreviewVc && PreviewType) {
-        PreviewDmg.innerHTML = currentPreview.dmg + "dmg";
-        PreviewDef.innerHTML = currentPreview.def + "def";
-        PreviewEva.innerHTML = currentPreview.eva + "eva";
-        PreviewHp.innerHTML = currentPreview.hp + "hp";
-        PreviewMag.innerHTML = currentPreview.mag + "mag";
-        PreviewSp.innerHTML = currentPreview.sp + "sp";
-        PreviewVc.innerHTML = currentPreview.vc + "vc";
+        && PreviewSp && PreviewVc && PreviewType
+        && PreviewName && PreviewDescr
+        && PreviewModCar && PreviewModCon &&
+        PreviewModInt && PreviewModFrz && PreviewModSue
+        && PreviewModDex) {
+        PreviewDmg.innerHTML = currentPreview.dmg + " dmg";
+        PreviewDef.innerHTML = currentPreview.def + " def";
+        PreviewEva.innerHTML = currentPreview.eva + " eva";
+        PreviewHp.innerHTML = currentPreview.hp + " hp";
+        PreviewMag.innerHTML = currentPreview.mag + " mag";
+        PreviewSp.innerHTML = currentPreview.sp + " sp";
+        PreviewVc.innerHTML = currentPreview.vc + " vc";
         PreviewType.innerHTML = currentPreview.PowerType;
+        PreviewName.innerHTML = currentPreview.flavorNombre;
+        PreviewDescr.innerHTML = currentPreview.flavorDescr;
+        // Calcular mods
+        PreviewModFrz.innerHTML = "Potencia: " + (Math.floor(currentPreview.Fuerza / 5) - 1);
+        PreviewModCon.innerHTML = "Resistencia: " + (Math.floor(currentPreview.Const / 5) - 1);
+        PreviewModDex.innerHTML = "Reflejos: " + (Math.floor(currentPreview.Dex / 5) - 1);
+        PreviewModInt.innerHTML = "Estrategia: " + (Math.floor(currentPreview.Intel / 5) - 1);
+        PreviewModCar.innerHTML = "Intimidación: " + (Math.floor(currentPreview.Carisma / 5) - 1);
+        PreviewModSue.innerHTML = "Suerte: " + (Math.floor(currentPreview.Suerte / 5) - 1);
     }
     else {
         console.error("Preview element not found");
@@ -200,3 +226,5 @@ for (var i = 0; i < document.getElementsByClassName("stat").length; i++) // Por 
     // Esta a su vez, llama a la función updatePreview
 }
 ;
+(_a = document.getElementById("cardName")) === null || _a === void 0 ? void 0 : _a.addEventListener("input", updateStats);
+(_b = document.getElementById("cardDescription")) === null || _b === void 0 ? void 0 : _b.addEventListener("input", updateStats);

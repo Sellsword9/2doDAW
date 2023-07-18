@@ -70,8 +70,11 @@ class previewCardModel
     readonly DmgSuerte: number = +1; 
 
     constructor(frz: number, con: number, dex: number, 
-                int: number, chr: number, srt: number)
+                int: number, chr: number, srt: number, 
+                nombre: string, descr: string)
     {
+        this.flavorNombre = nombre;
+        this.flavorDescr = descr;
         this.Fuerza = frz; this.Const = con; this.Dex = dex;
         this.Intel = int; this.Carisma = chr; this.Suerte = srt;
         // Asignación atributos
@@ -152,6 +155,14 @@ function updatePreview()
     var PreviewSp = document.getElementById("cpSp");
     var PreviewVc = document.getElementById("cpVc");
     var PreviewType = document.getElementById("cpType");
+    var PreviewName = document.getElementById("cpName");
+    var PreviewDescr = document.getElementById("cpDescription");
+    var PreviewModFrz = document.getElementById("cpModFuerza");
+    var PreviewModCon = document.getElementById("cpModConstitucion");
+    var PreviewModDex = document.getElementById("cpModDestreza");
+    var PreviewModInt = document.getElementById("cpModInteligencia");
+    var PreviewModCar = document.getElementById("cpModCarisma");
+    var PreviewModSue= document.getElementById("cpModSuerte");
 
     var FuerzaStat = parseInt((document.getElementById("FuerzaStat") as HTMLTextAreaElement)?.value);
     var ConstStat = parseInt((document.getElementById("ConstitucionStat") as HTMLTextAreaElement)?.value);
@@ -159,23 +170,38 @@ function updatePreview()
     var IntelStat = parseInt((document.getElementById("InteligenciaStat") as HTMLTextAreaElement)?.value);
     var CarismaStat = parseInt((document.getElementById("CarismaStat") as HTMLTextAreaElement)?.value);
     var SuerteStat = parseInt((document.getElementById("SuerteStat") as HTMLTextAreaElement)?.value);
+    var nombre = (document.getElementById("cardName") as HTMLTextAreaElement)?.value;
+    var descr = (document.getElementById("cardDescription") as HTMLTextAreaElement)?.value;
     
     var currentPreview = new previewCardModel(
         FuerzaStat, ConstStat, DexStat, 
-        IntelStat, CarismaStat, SuerteStat);
+        IntelStat, CarismaStat, SuerteStat, nombre, descr);
     
     if (currentPreview && PreviewDmg && PreviewHp 
         && PreviewMag && PreviewDef && PreviewEva 
-        && PreviewSp && PreviewVc && PreviewType)
+        && PreviewSp && PreviewVc && PreviewType 
+        && PreviewName && PreviewDescr
+        && PreviewModCar && PreviewModCon &&
+        PreviewModInt && PreviewModFrz && PreviewModSue
+        && PreviewModDex)
     {
-        PreviewDmg.innerHTML = currentPreview.dmg + "dmg";
-        PreviewDef.innerHTML = currentPreview.def + "def";
-        PreviewEva.innerHTML = currentPreview.eva + "eva";
-        PreviewHp.innerHTML = currentPreview.hp + "hp";
-        PreviewMag.innerHTML = currentPreview.mag + "mag";
-        PreviewSp.innerHTML = currentPreview.sp + "sp";
-        PreviewVc.innerHTML = currentPreview.vc + "vc";
+        PreviewDmg.innerHTML = currentPreview.dmg + " dmg";
+        PreviewDef.innerHTML = currentPreview.def + " def";
+        PreviewEva.innerHTML = currentPreview.eva + " eva";
+        PreviewHp.innerHTML = currentPreview.hp + " hp";
+        PreviewMag.innerHTML = currentPreview.mag + " mag";
+        PreviewSp.innerHTML = currentPreview.sp + " sp";
+        PreviewVc.innerHTML = currentPreview.vc + " vc";
         PreviewType.innerHTML = currentPreview.PowerType;
+        PreviewName.innerHTML = currentPreview.flavorNombre;
+        PreviewDescr.innerHTML = currentPreview.flavorDescr;
+        // Calcular mods
+        PreviewModFrz.innerHTML = "Potencia: " + (Math.floor(currentPreview.Fuerza / 5)     -1);
+        PreviewModCon.innerHTML = "Resistencia: " + (Math.floor(currentPreview.Const / 5)   -1);
+        PreviewModDex.innerHTML = "Reflejos: " + (Math.floor(currentPreview.Dex / 5)        -1);
+        PreviewModInt.innerHTML = "Estrategia: " + (Math.floor(currentPreview.Intel / 5)    -1);
+        PreviewModCar.innerHTML = "Intimidación: " + (Math.floor(currentPreview.Carisma / 5) -1);
+        PreviewModSue.innerHTML = "Suerte: " + (Math.floor(currentPreview.Suerte / 5)       -1);
     }
     else
     {
@@ -232,3 +258,5 @@ for (var i = 0; i < document.getElementsByClassName("stat").length; i++) // Por 
     // Que llame a la función updateStats
         // Esta a su vez, llama a la función updatePreview
 };
+document.getElementById("cardName")?.addEventListener("input", updateStats);
+document.getElementById("cardDescription")?.addEventListener("input", updateStats);
