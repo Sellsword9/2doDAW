@@ -45,7 +45,7 @@
     {
         echo '<a href="ejercicio0.php?control=1">Estado 1</a><br><br>';
         echo '<a href="ejercicio0.php?control=2">Estado 2</a><br><br>';
-        echo '<a href="ejercicio0.php?control=3">Estado 3</a>';
+        echo '<a href="ejercicio0.php?control=3">Multiplicación</a>';
     }
 
 ?>
