@@ -1,0 +1,43 @@
+/* styles.css */
+/* It just works*/
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.input-container {
+    text-align: center;
+    padding: 20px;
+}
+
+label {
+    font-size: 18px;
+}
+
+#equationInput {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+#drawButton {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.equation-display {
+    text-align: center;
+    padding: 20px;
+}
+
+.equation-canvas {
+    border: 1px solid #000;
+}
+
