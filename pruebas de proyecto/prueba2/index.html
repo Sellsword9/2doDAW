@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equation Viewer</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.8.0/math.min.js"></script>
+</head>
+<body>
+    <div class="input-container">
+        <label for="equationInput">Enter an equation:</label>
+        <input type="text" id="equationInput" placeholder="e.g., 2*x + 1">
+        <button id="drawButton">Draw</button>
+    </div>
+    <div class="equation-display">
+        <p>Equation: <span id="displayedEquation"></span></p>
+        <canvas id="equationCanvas" class="equation-canvas"></canvas>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
