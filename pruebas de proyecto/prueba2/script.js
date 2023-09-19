@@ -24,7 +24,9 @@ function drawEquation() {
         // Define the x-axis and y-axis scale
         const xScale = 1; // Adjust as needed for horizontal scaling
         const yScale = 800; // Adjust as needed for vertical scaling
-
+        
+        // Wait this works
+        
         // Draw the equation plot with lines
         ctx.beginPath();
         for (let i = 0; i < numPoints; i++) {
