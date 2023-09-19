@@ -4,7 +4,7 @@ const ctx = canvas.getContext("2d");
 const equationInput = document.getElementById("equationInput");
 
 let t = 0;
-let equation = "3.1415 * Math.sin(t * 0.5)";
+let equation = "Math.PI * Math.sin(t * 0.5) + (Math.PI / 2)";
 const trace = [];
 
 function updateEquation() {
