@@ -17,7 +17,9 @@ function drawEquation() {
         // Parse and evaluate the entered equation using Math.js
         const parsedExpression = math.parse(equationText);
         const compiledExpression = parsedExpression.compile();
-
+        //vardump
+        console.log(parsedExpression);
+        console.log(compiledExpression);
         // Set the number of points for a smoother curve
         const numPoints = 8000;
 
@@ -29,11 +31,11 @@ function drawEquation() {
         
         // Draw the equation plot with lines
         ctx.beginPath();
+        // increase x scale depending on the potency of the equation
+        if(parsedExpression.fn == "pow"){
+            xScale = 2.5 * parsedExpression.args[1].value;
+        }
         for (let i = 0; i < numPoints; i++) {
-            // increase x scale depending on the potency of the equation
-            for (let j = 0; j < parsedExpression.filter((node) => node.isSymbolNode && node.name === 'x').length; j++) {
-                xScale *= 5 ^ j ;
-            }
             const x = (i - equationCanvas.width / 2) * xScale / equationCanvas.width;
             const y = compiledExpression.evaluate({ x: x});
             const canvasX = i;
@@ -49,7 +51,7 @@ function drawEquation() {
         // Display the entered equation
         displayedEquation.textContent = equationText;
     } catch (error) {
-        alert("Invalid equation. Please enter a valid mathematical expression.");
+        alert("Error. Trying a different equation may work. Error info: " + error.message);
     }
 }
 
