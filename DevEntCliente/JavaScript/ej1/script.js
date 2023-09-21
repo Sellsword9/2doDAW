@@ -23,5 +23,5 @@ function factorial(num){
         return NaN;
     }
 }
-console.log(factorial("1c2"));
+console.log(factorial(999));
 console.log(factorial(10));
