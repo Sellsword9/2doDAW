@@ -11,6 +11,16 @@
     $arraytest[] = "LAST";
     //$control = true;
     ?>
+    <?php
+       if($_GET['abc'] == 'cba')
+       {
+        echo '<p>Modo ABC</p>';
+       } 
+       else
+        {
+          echo '<p>Prueba ?abc=cba</p>';
+        }
+    ?>
     <?php if(!empty($control)) {
         echo '<p>Control es verdadero</p>';
     }
