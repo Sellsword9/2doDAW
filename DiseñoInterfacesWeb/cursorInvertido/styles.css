@@ -2,13 +2,20 @@ body {
     margin: 0;
     overflow: hidden;
     cursor: none; /* Oculta el cursor predeterminado */
+    background-color: white;
+    color: black;
 }
+  
+  body.dark-mode {
+    background-color: rgb(72, 72, 72);
+    color: white;
+  }
 
 .cursor {
 
     width: 30px;
     height: 30px;
-    background: rgba(255, 255, 255, 0.23);
+    background: rgba(255, 255, 255, 0.0);
     background-clip: border-box;
     border: 2px solid #ffffff; /* Borde negro */
     border-radius: 50%;
