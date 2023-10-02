@@ -13,8 +13,8 @@ body {
 
 .cursor {
 
-    width: 30px;
-    height: 30px;
+    width: 10vh;
+    height: 10vh ;
     background: rgba(255, 255, 255, 0.0);
     background-clip: border-box;
     border: 2px solid #ffffff; /* Borde negro */

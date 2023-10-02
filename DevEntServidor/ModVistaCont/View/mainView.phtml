@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feed principal</title>
+</head>
+<body>
+    <h4>Feed principal</h4>
+    <?php
+        foreach($pubs as $pub){
+            echo "<h1>".$pub->getTitulo()."</h1>";
+            echo "<p>".$pub->getTexto()."</p>";
+        }
+        echo "Sesión: "; echo "<br>";
+        echo var_dump($_SESSION["user"]);
+        echo "<br>";
+        echo var_dump($_SESSION["logged"]);
+        echo "<a href='index.php?logout=true'>Cerrar sesión</a>"
+    ?>
+</body>
+</html>
