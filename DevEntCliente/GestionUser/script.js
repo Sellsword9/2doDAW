@@ -1,4 +1,9 @@
-import { saludar as saludo} from "./assets/module.js";
+import data from './assets/module.js'
 
-saludo("Jorge");
+const functio  = (data) => {
+    data.
+        filter((obj) => obj.email.endsWith('.es'))
+        .reduce((mapa, obj) => mapa.set(`${obj.first_name} ${obj.last_name}`, obj.email), new Map());
+}
 
+console.log(espanioles(data))
