@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>>Editar publicación</title>
+</head>
+<style>
+        form
+        {
+            display: flex;
+            flex-direction: column;
+            width: 50%;
+            margin: 0 auto;
+        }
+        label
+        {
+            font-weight: bold;
+        }
+        input, textarea
+        {
+            margin-bottom: 1rem;
+            background-color: #eee;
+        }
+        input[type="submit"]
+        {
+            background-color: rgb(110, 7, 38);
+            color: #fff;
+            border: none;
+            padding: 1rem;
+            cursor: pointer;
+        }
+</style>
+<body>
+    <?php
+    $temppub = new Publicacion($editdata);
+    echo '<form action="index.php?admin=1&editdone='.$temppub->getId().'" method="post">';
+    echo    '<label for="titulo">Título</label>';
+    echo    '<input type="text" name="titulo" id="titulo" value="'.$temppub->getTitle().'">';
+    echo    '<label for="texto">Texto</label>';
+    echo    '<textarea name="texto" id="texto" cols="30" rows="10">'.$temppub->getText().'</textarea>';
+    echo    '<input type="submit" value="Crear">';
+    echo '</form>';
+    ?>
+</body>
+</html>

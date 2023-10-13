@@ -1,0 +1,32 @@
+<?php
+    
+    echo "<h1>Publicaciones</h1>";
+
+    foreach ($pubs as $pub)
+    {
+        echo "<div class='pub'>";
+        echo "<h3>" . $pub->getTitle() . "</h3>";
+        echo "<p>" . $pub->getText() . "</p>";
+        echo "</div>";
+    }
+
+   if (isset($_SESSION['user']))
+   {
+        echo "<h3><a href='index.php?logout=1'>Cerrar sesión</a></h3>";
+        echo "<h3><a href='index.php?newPub=1'>Nueva publicación</a></h3>";
+        if (($_SESSION['user']->getRol()) > 1)
+        {
+            // Redirigir al modo admin
+            echo "<h3><a href='index.php?admin=1'>Modo admin</a></h3>";
+        }
+   }
+   else
+   {
+        echo "<h3><a href='index.php'>Iniciar sesión</a></h3>";
+   }
+
+
+
+
+
+?>

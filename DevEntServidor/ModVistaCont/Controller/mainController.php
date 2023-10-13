@@ -24,7 +24,7 @@
             include ("View/mainView.phtml");
 
         } else {
-            $error = "Usuario o contraseña incorrectos";
+           // contraseña incorrecta
         }
     }else
     {
