@@ -12,10 +12,13 @@
             echo "<h1>".$pub->getTitulo()."</h1>";
             echo "<p>".$pub->getTexto()."</p>";
         }
-        echo "Sesión: "; echo "<br>";
-        echo var_dump($_SESSION["user"]);
-        echo "<br>";
-        echo var_dump($_SESSION["logged"]);
+        // echo "Sesión: "; echo "<br>";
+        // echo var_dump($_SESSION["user"]);
+        // echo "<br>";
+        // echo var_dump($_SESSION["logged"]);
+        if ($_SESSION['logged']){
+            echo "<a href='index.php?create=true'> Crear una publicación </a>";
+        }
         echo "<a href='index.php?logout=true'>Cerrar sesión</a>"
     ?>
 </body>
