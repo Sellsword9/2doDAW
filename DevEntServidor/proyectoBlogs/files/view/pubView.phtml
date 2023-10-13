@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?php $ViewPub->getTitle(); ?></title>
+    <style>
+        div {
+            border: 0.2rem solid black;
+            padding: 0.5rem;
+            margin: 0.5rem;
+            background-color: #aee;
+            display: flex;
+            flex-direction: column;
+        }
+        .pub {
+            font-size: larger;
+            cursor: pointer;
+        }
+        body {
+            background-color: #eee;
+        }
+    </style>
+</head>
+<body>
+    <?php
+    echo "<div><h1>".$ViewPub->getTitle()."</h1>";
+    echo '<p>'.$ViewPub->getText().'</p></div>';
+
+    echo "<h2>Comentarios</h2>";
+    echo "<div>";
+    foreach($comments as $comm) {
+        echo "<div><p>".$comm->getText()."</p>";
+        echo "<p> Fmdo: ".$comm->getAutor()."</p></div>";
+    }
+    echo "</div>";
+    ?>
+</body>
+</html>

@@ -45,10 +45,22 @@
             }
         }
     }
+
     // If get exists 
+    if (isset($_GET['search']))
+    {
+        $pubs = PubRepository::search($_POST['search']);
+        require_once("view/mainView.phtml");
+        die();
+    }
     if (isset($_GET['register']))
     {
         require_once("view/register.phtml");
+        die();
+    }
+    if (isset($_GET['seePub']))
+    {
+        require_once("controller/CommentController.php");
         die();
     }
     if (isset($_GET['newPub']))
