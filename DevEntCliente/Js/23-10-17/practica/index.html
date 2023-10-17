@@ -5,8 +5,50 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   </head>
   <body>
+    <header class="bg-primary texdt-center py-2">
+      <div class="container">
+        <h1 class="text-ligth">Uso de prototipos en JavaScript</h1>
+      </div>
+    </header>
+    <div class="container mt-2">
+      <div class="row">
+        
+        <div class="col-md-7 mt-4">
+          <h3 class="text-center"> Usuario y DNI prototype</h3>
+          <form action="" class="userprotoyype" id="formulariousuarios">
+            <div class="mb-3">
+              <label for="username" class="form-label">Username</label>
+              <input type="text" class="form-control" id="username">
+            </div>
+            <div class="mb-3">
+              <label for="edad" class="form-label">Edad</label>
+              <input type="number" class="form-control" id="edad">
+            </div>
+            <div class="mb-3">
+              <label for="dni" class="form-label">DNI</label>
+              <input type="text" class="form-control" id="dni">
+            </div>
+            <div class="d-flex justify-content-end">
+            <button class="btn btn-primary" id="insertarUsuario">Insertar Usuario</button>
+            </div>
+          </form>
+        </div>
+        <div class="col-md-5 mt-4">
+          <h3 class="text-center">Copia de seguridad en LocalStorage</h3>
+          <p class="text-center" id="copiaPreview"></p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Scripts-->
+    <script 
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" 
+    crossorigin="anonymous"></script>
     <script type="module" src="/script.js"></script>
   </body>
 </html>
