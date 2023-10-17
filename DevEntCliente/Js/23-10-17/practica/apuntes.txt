@@ -1,0 +1,5 @@
+
+console.table(usuarios);
+shows a table with the array of usuarios
+console.dir(usuarios);
+may be useful
