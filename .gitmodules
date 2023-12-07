@@ -1,3 +1,6 @@
 [submodule "DiseñoInterfacesWeb/sass"]
 	path = DiseñoInterfacesWeb/sass
 	url = https://www.github.com/sellsword9/sass
+[submodule "DevEntCliente/ExamenTienda"]
+	path = DevEntCliente/ExamenTienda
+	url = https://github.com/Sellsword9/JS-PracticaExamen-Tienda
