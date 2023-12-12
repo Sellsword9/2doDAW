@@ -4,3 +4,6 @@
 [submodule "DevEntCliente/ExamenTienda"]
 	path = DevEntCliente/ExamenTienda
 	url = https://github.com/Sellsword9/JS-PracticaExamen-Tienda
+[submodule "DevEntServidor/PracticaTienda"]
+	path = DevEntServidor/PracticaTienda
+	url = https://github.com/sellsword9/dwes4
