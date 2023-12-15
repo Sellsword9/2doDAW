@@ -7,3 +7,9 @@
 [submodule "DevEntServidor/PracticaTienda"]
 	path = DevEntServidor/PracticaTienda
 	url = https://github.com/sellsword9/dwes4
+[submodule "php-pokemonmanager"]
+	path = php-pokemonmanager
+	url = https://www.github.com/sellsword9/php-pokemonmanager
+[submodule "DevEntServidor/pokemon"]
+	path = DevEntServidor/pokemon
+	url = https://www.github.com/sellsword9/php-pokemonmanager
